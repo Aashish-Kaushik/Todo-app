@@ -7,13 +7,13 @@ const { notFound, errorHandler } = require("./middelware/notFound");
 //middleware
 app.use(express.static("./public/"));
 app.use(express.json());
-app.use(notFound);
-app.use(errorHandler);
 
 // routes
 
 app.use("/api/v1/tasks", tasks);
 
+app.use(notFound);
+app.use(errorHandler);
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL);
