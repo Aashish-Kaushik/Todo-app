@@ -3,16 +3,20 @@ const mongooes = require("mongoose");
 const taskSchema = new mongooes.Schema(
   {
     name: {
-      type: "String",
+      type: String,
       required: [true, "must be provided"],
       trim: true,
     },
     completed: {
-      type: "Boolean",
+      type: Boolean,
       default: false,
     },
+    createdBy: {
+      type: mongooes.Schema.Type.ObjectId,
+      ref: "User"
+    }
   },
-  { versionKey: false }
+  { timestamps: true }
 );
 
-module.exports = mongooes.model("Task", taskSchema);
+export const Task = mongooes.model("Task", taskSchema);
